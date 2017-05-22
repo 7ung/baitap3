@@ -13,7 +13,7 @@ public class Bank {
         this.setName(n);
         this.setUrlImage(img);
         if (dfmt.equals(""))
-            dateFormat = null;
+            dateFormat = new SimpleDateFormat();
         else
             dateFormat = new SimpleDateFormat(dfmt);
     }
@@ -42,7 +42,7 @@ public class Bank {
     }
 
     public void setDate(Date date) {
-        if (dateFormat != null)
+        if (dateFormat != null && !dateFormat.equals(""))
             this.date = this.dateFormat.format(date);
         else
             date.toString();

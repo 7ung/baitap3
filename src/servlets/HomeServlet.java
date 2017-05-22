@@ -24,8 +24,8 @@ public class HomeServlet extends HttpServlet {
     private static HashMap<String, Bank> Data = new HashMap<String, Bank>();
     static {
         Data.put("vi", new Bank("Ngân hàng Sài Gòn Thương Tín", "", "dd-MM-yyyy"));
-        Data.put("ko", new Bank("사이공 투옹 틴 상업 은행", "", " "));
-        Data.put("en", new Bank("Sai Gon Commercial Bank", "", " "));
+        Data.put("ko", new Bank("사이공 투옹 틴 상업 은행", "", "dd MMMM yyyy"));
+        Data.put("en", new Bank("Sai Gon Commercial Bank", "", "dd MMMM yyyy"));
 
     }
 
