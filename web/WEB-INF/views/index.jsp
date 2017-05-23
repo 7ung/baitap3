@@ -39,7 +39,7 @@
                                 </ul>
                                 <span id="bank-date" style="height: 35px; float: right; padding-top: 15px; margin-left: 10px;"> ${bank.date}</span>
                                 <div class="form-group" style="width: 180px; height: 35px;  float:  right; padding-top: 10px; ;" >
-                                    <span style="float: left;padding-top: 7px;">Languages:</span>
+                                    <span style="float: left;padding-top: 7px;" id="langs">Languages:</span>
                                     <select class="form-control" id="sel1" style="width: 100px; float: right;">
                                         <option value="en">English</option>
                                         <option value="vi">VietNam</option>
@@ -50,6 +50,7 @@
                         </nav>
                     </div>
                     <img id="bank-img" src="${bank.urlImage}" style="width: 100%"/>
+                    <span id="txt1"content="" ></span>
                     <p id="bank-about-us"></p>
                 </div>
             </div>
@@ -63,6 +64,10 @@
 
 <script>
     $(document).ready(function(){
+
+        $('#txt1').hide();
+        $('#bank-about-us').hide();
+
         $('#sel1').change(function () {
             var lang = $('#sel1 option:selected').first().val();
             var rs1 = $.ajax({
@@ -72,7 +77,7 @@
                     $('#bank-name').text(bank['name']);
                     $('#bank-img').attr('src', bank['urlImage']);
                     $('#bank-date').innerHTML = bank['date'];
-
+                    $('#bank-about-us').text(bank['name']);
                 }
             })
 
@@ -84,9 +89,47 @@
                     $('#nav-1').text(list_text['home']);
                     $('#nav-2').text(list_text['aboutUs']);
                     $('#nav-3').text(list_text['productAndServices']);
-
+                    $('#langs').text(list_text['languages']);
+                    $('#txt1').text(list_text['txt1']);
                 }
             });
+        });
+
+        $('#nav-2').click(function () {
+            var lang = $('#sel1 option:selected').first().val();
+            var rs1 = $.ajax({
+                url: '${pageContext.request.contextPath}/rs/bank?lang=' + lang,
+                success:function (data) {
+                    var bank = $.parseJSON(rs1.responseText);
+                    $('#bank-about-us').text(bank['name']);
+                }
+            });
+
+            var rs2 = $.ajax({
+
+                url: '${pageContext.request.contextPath}/rs/language?lang=' + lang,
+                success:function (data) {
+                    var list_text = $.parseJSON(rs2.responseText);
+                    $('#nav-1').text(list_text['home']);
+                    $('#nav-2').text(list_text['aboutUs']);
+                    $('#nav-3').text(list_text['productAndServices']);
+                    $('#langs').text(list_text['languages']);
+                    $('#txt1').text(list_text['txt1']);
+                }
+            });
+            $('#txt1').show();
+            $('#bank-about-us').show();
+            $('#nav-1').parent().removeClass('active');
+            $('#nav-3').parent().removeClass('active');
+            $('#nav-2').parent().addClass('active');
+        });
+
+        $('#nav-1').click(function () {
+            $('#txt1').hide();
+            $('#bank-about-us').hide();
+            $('#nav-2').parent().removeClass('active');
+            $('#nav-3').parent().removeClass('active');
+            $('#nav-1').parent().addClass('active');
         });
     });
 </script>
