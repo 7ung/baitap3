@@ -16,17 +16,51 @@ import java.util.HashMap;
 public class BankWs {
 
     public static HashMap<String, Bank> Data = new HashMap<String, Bank>();
+
+    //    static {
+//        Data.put("vi", new Bank("Ngân hàng Sài Gòn Thương Tín", "http://img15.deviantart.net/9fd9/i/2012/052/1/d/rukia_new_look_by_rukiamrss-d4qhibw.png", "dd-MM-yyyy"));
+//        Data.put("ko", new Bank("사이공 투옹 틴 상업 은행", "http://02e1b73.netsolhost.com/homes/hitsugaya-toushiro-new-look-33.jpg", "dd MMMM yyyy"));
+//        Data.put("en", new Bank("Sai Gon Commercial Bank", "https://lh6.googleusercontent.com/-EhDfx-ES2Aw/TX1mPniK9kI/AAAAAAAAAaQ/spkirbryfxw/s1600/Z2.bmp", "dd MMMM yyyy"));
+//
+//    }
     static {
-        Data.put("vi", new Bank("Ngân hàng Sài Gòn Thương Tín", "http://img15.deviantart.net/9fd9/i/2012/052/1/d/rukia_new_look_by_rukiamrss-d4qhibw.png", "dd-MM-yyyy"));
-        Data.put("ko", new Bank("사이공 투옹 틴 상업 은행", "http://02e1b73.netsolhost.com/homes/hitsugaya-toushiro-new-look-33.jpg", "dd MMMM yyyy"));
-        Data.put("en", new Bank("Sai Gon Commercial Bank", "https://lh6.googleusercontent.com/-EhDfx-ES2Aw/TX1mPniK9kI/AAAAAAAAAaQ/spkirbryfxw/s1600/Z2.bmp", "dd MMMM yyyy"));
+        Data.put("vi", new Bank("Ngân hàng Sài Gòn Thương Tín",
+                "http://event.onlinefriday.vn/uploads/datatables/ngan-hang-sacombank-of07q.jpg",
+                "dd-MM-yyyy",
+                "Tỉ giá",
+                "Lãi xuất",
+                "Tháng",
+                "Ngoại tệ",
+                "Bán",
+                "Mua",
+                "Kì hạn"));
+        Data.put("ko", new Bank("사이공 투옹 틴 상업 은행",
+                "http://cafefcdn.com/k:2016/photo-3-1470895902761/diemmat7onglonnganhang100vonnuocngoaidangcanhtranhquyetlietvoinhabangnoi.jpg",
+                "dd MMMM yyyy",
+                "환율",
+                "이자율",
+                "월",
+                "외화",
+                "판매",
+                "사기", "한강의 기"));
+        Data.put("en", new Bank("Sai Gon Commercial Bank",
+                "http://vietnambiz.vn/stores/news_dataimages/quanglt/032017/29/13/5511_Banking-13-600x448.jpg",
+                "dd MMMM yyyy",
+
+                "Rate",
+                "Profit",
+                "Month",
+                "Currency",
+                "Sale",
+                "Buy",
+                "Period"));
 
     }
 
     @GET
     @Produces({"application/json; charset=UTF-8"})
     public Bank bank_show(@QueryParam("lang") String lang) {
-        if (lang == null || lang.equals("")){
+        if (lang == null || lang.equals("")) {
             lang = "en";
         }
 
@@ -38,4 +72,5 @@ public class BankWs {
 
         return bank;
     }
+
 }
