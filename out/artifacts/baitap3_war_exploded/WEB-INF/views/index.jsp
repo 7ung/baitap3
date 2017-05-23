@@ -21,7 +21,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     </head>
     <body>
         <div class="container">
@@ -78,12 +77,13 @@
             })
 
             var rs2 = $.ajax({
-                url: '${pageContext.request.contextPath}/rs/language?lang=' + '${lang}',
+
+                url: '${pageContext.request.contextPath}/rs/language?lang=' + lang,
                 success:function (data) {
                     var list_text = $.parseJSON(rs2.responseText);
-                    $('#nav-1').text(list_text['nav-1']);
-                    $('#nav-2').text(list_text['nav-2']);
-                    $('#nav-3').text(list_text['nav-3']);
+                    $('#nav-1').text(list_text['home']);
+                    $('#nav-2').text(list_text['aboutUs']);
+                    $('#nav-3').text(list_text['productAndServices']);
 
                 }
             });

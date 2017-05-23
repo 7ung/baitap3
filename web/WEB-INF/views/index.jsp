@@ -21,10 +21,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     </head>
     <body>
-
         <div class="container">
             <div class="row">
                 <div class=" col-md-offset-1" style="margin-left: 130px;" >
@@ -35,10 +33,9 @@
                                     <a class="navbar-brand" href="#" id="bank-name">${bank.name}</a>
                                 </div>
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="#">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Product</a></li>
-                                    <li><a href="#">Service</a></li>
+                                    <li class="active"><a href="#" id="nav-1">Home</a></li>
+                                    <li><a href="#" id="nav-2">About</a></li>
+                                    <li><a href="#" id="nav-3">Product</a></li>
                                 </ul>
                                 <span id="bank-date" style="height: 35px; float: right; padding-top: 15px; margin-left: 10px;"> ${bank.date}</span>
                                 <div class="form-group" style="width: 180px; height: 35px;  float:  right; padding-top: 10px; ;" >
@@ -53,7 +50,7 @@
                         </nav>
                     </div>
                     <img id="bank-img" src="${bank.urlImage}" style="width: 100%"/>
-
+                    <p id="bank-about-us"></p>
                 </div>
             </div>
         </div>
@@ -68,10 +65,10 @@
     $(document).ready(function(){
         $('#sel1').change(function () {
             var lang = $('#sel1 option:selected').first().val();
-            var rs = $.ajax({
+            var rs1 = $.ajax({
                 url: '${pageContext.request.contextPath}/rs/bank?lang=' + lang,
                 success:function (data) {
-                    var bank = $.parseJSON(rs.responseText);
+                    var bank = $.parseJSON(rs1.responseText);
                     $('#bank-name').text(bank['name']);
                     $('#bank-img').attr('src', bank['urlImage']);
                     $('#bank-date').innerHTML = bank['date'];
@@ -79,6 +76,17 @@
                 }
             })
 
+            var rs2 = $.ajax({
+
+                url: '${pageContext.request.contextPath}/rs/language?lang=' + lang,
+                success:function (data) {
+                    var list_text = $.parseJSON(rs2.responseText);
+                    $('#nav-1').text(list_text['home']);
+                    $('#nav-2').text(list_text['aboutUs']);
+                    $('#nav-3').text(list_text['productAndServices']);
+
+                }
+            });
         });
     });
 </script>
